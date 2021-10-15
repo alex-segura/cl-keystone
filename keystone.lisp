@@ -129,7 +129,8 @@ The default assembly syntax for CODE is :INTEL."
           (let* ((array-size (cffi:mem-ref encoding-size :ulong))
                  (bytes (cffi:foreign-array-to-lisp
                          (cffi:mem-ref encoding :pointer)
-                         `(:array :uint8 ,array-size)))
+                         `(:array :uint8 ,array-size)
+                         :element-type '(unsigned-byte 8)))
                  (stats (cffi:mem-ref stat-count :ulong)))
             (ks-free (cffi:mem-ref encoding :pointer))
             (values bytes array-size stats)))))))
